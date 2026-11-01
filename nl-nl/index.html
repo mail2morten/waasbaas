@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WaasBaas — Stop met het bouwen van websites. Laat Meester Waas Baas de jouwe runnen.</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Tailwind Config for Brand Palette & Typography -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    colors: {
+                        waas: {
+                            bg: '#0F172A',
+                            card: '#1E293B',
+                            amber: '#D97706',
+                            amberLight: '#F59E0B',
+                            cyan: '#00F0FF',
+                            sky: '#38BDF8',
+                            purple: '#8B5CF6',
+                            purpleLight: '#A855F7',
+                            orange: '#FF6B35',
+                            orangeLight: '#F97316',
+                            mint: '#10B981',
+                            teal: '#2DD4BF',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Custom CSS for Holographic Glassmorphism, Neon Glows & Floating Keyframes -->
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #F8FAFC;
+            overflow-x: hidden;
+        }
+
+        /* Wood Slat Studio Background Hint */
+        .wood-slat-bg {
+            background-image: repeating-linear-gradient(
+                90deg,
+                rgba(217, 119, 6, 0.03) 0px,
+                rgba(217, 119, 6, 0.03) 14px,
+                rgba(15, 23, 42, 0.4) 14px,
+                rgba(15, 23, 42, 0.4) 28px
+            );
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .glass-panel-purple {
+            background: rgba(30, 41, 59, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(168, 85, 247, 0.25);
+        }
+
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+        }
+
+        /* Neon Box Shadows */
+        .neon-cyan {
+            box-shadow: 0 0 25px rgba(0, 240, 255, 0.25), inset 0 0 15px rgba(56, 189, 248, 0.1);
+        }
+
+        .neon-cyan-strong {
+            box-shadow: 0 0 35px rgba(0, 240, 255, 0.45), 0 0 12px rgba(56, 189, 248, 0.4);
+        }
+
+        .neon-purple {
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.3), inset 0 0 15px rgba(168, 85, 247, 0.1);
+        }
+
+        .neon-orange {
+            box-shadow: 0 0 25px rgba(255, 107, 53, 0.45);
+        }
+
+        .neon-orange:hover {
+            box-shadow: 0 0 35px rgba(255, 107, 53, 0.75), 0 0 15px rgba(249, 115, 22, 0.5);
+        }
+
+        .neon-text-cyan {
+            text-shadow: 0 0 15px rgba(0, 240, 255, 0.5);
+        }
+
+        /* Floating Animations */
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+
+        @keyframes floatMedium {
+            0%, 100% { transform: translateY(0px) translateX(0px); }
+            50% { transform: translateY(-16px) translateX(4px); }
+        }
+
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-1deg); }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 0.85; transform: scale(1.04); }
+        }
+
+        .animate-float-slow {
+            animation: floatSlow 6s ease-in-out infinite;
+        }
+
+        .animate-float-medium {
+            animation: floatMedium 5s ease-in-out infinite;
+        }
+
+        .animate-float-reverse {
+            animation: floatReverse 5.5s ease-in-out infinite;
+        }
+
+        .animate-pulse-glow {
+            animation: pulseGlow 4s ease-in-out infinite;
+        }
+
+        /* Holographic Window Hover Effect */
+        .holo-card {
+            transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .holo-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 240, 255, 0.55);
+            box-shadow: 0 15px 35px -10px rgba(0, 240, 255, 0.25), 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0F172A;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1E293B;
+            border-radius: 5px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #334155;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-waas-cyan selection:text-slate-950 relative">
+
+    <!-- Ambient Studio Lighting & Neon Background Orbs -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden wood-slat-bg">
+        <!-- Warm Studio Wood/Amber Glow Top Left -->
+        <div class="absolute -top-40 -left-40 w-96 h-96 bg-amber-500/10 rounded-full blur-[130px]"></div>
+        <!-- Warm Studio Amber Glow Center Right -->
+        <div class="absolute top-1/4 right-1/3 w-[500px] h-[500px] bg-amber-600/10 rounded-full blur-[160px]"></div>
+        <!-- Electric Cyan Glow Top Right -->
+        <div class="absolute top-20 -right-20 w-[450px] h-[450px] bg-sky-400/15 rounded-full blur-[140px]"></div>
+        <!-- Vibrant Purple Glow Middle Left -->
+        <div class="absolute top-1/2 -left-32 w-[450px] h-[450px] bg-purple-600/15 rounded-full blur-[150px]"></div>
+        <!-- Bottom Cyan Glow -->
+        <div class="absolute bottom-10 right-1/4 w-96 h-96 bg-cyan-400/10 rounded-full blur-[140px]"></div>
+    </div>
+
+    <!-- ==========================================
+         1. STICKY GLASSMORPHIC NAVBAR
+         ========================================== -->
+    <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Left: Glowing Cyan Cloud Logo with "W" inside + WaasBaas Wordmark -->
+            <a href="#" class="flex items-center gap-3 group focus:outline-none">
+                <div class="relative flex items-center justify-center w-12 h-10">
+                    <!-- Glowing Cloud SVG with W -->
+                    <svg viewBox="0 0 64 48" class="w-12 h-10 drop-shadow-[0_0_12px_rgba(0,240,255,0.75)] transition-transform duration-300 group-hover:scale-105" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M49.5 22C49.8 20.7 50 19.4 50 18C50 9.7 43.3 3 35 3C28.8 3 23.5 6.7 21.2 12.1C19.6 11.4 17.9 11 16 11C9.4 11 4 16.4 4 23C4 23.6 4.1 24.2 4.2 24.8C1.7 26.9 0 30 0 33.5C0 39.8 5.2 45 11.5 45H48.5C56 45 62 39 62 31.5C62 25.4 57.9 20.2 52.3 18.6" fill="rgba(56, 189, 248, 0.18)"/>
+                        <path d="M48.5 43H13.5C7.7 43 3 38.3 3 32.5C3 27.6 6.4 23.4 11.1 22.3C10.9 21.2 10.8 20.1 10.8 19C10.8 11.8 16.6 6 23.8 6C29.4 6 34.2 9.5 36 14.5C37.6 13.5 39.5 13 41.5 13C47.3 13 52 17.7 52 23.5C52 24.2 51.9 24.9 51.8 25.5C56.5 26.9 60 31.3 60 36.5C60 40.1 55.2 43 48.5 43Z" stroke="#00F0FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        <text x="31.5" y="34" text-anchor="middle" fill="#F8FAFC" font-family="Plus Jakarta Sans, sans-serif" font-weight="800" font-size="16" letter-spacing="-0.5">W</text>
+                    </svg>
+                </div>
+                <div class="flex flex-col">
+                    <span class="text-2xl font-extrabold tracking-tight text-white flex items-center">
+                        Waas<span class="text- transparent bg-clip-text bg-gradient-to-r from-waas-cyan to-waas-purple">Baas</span>
+                    </span>
+                    <span class="text-[10px] font-mono uppercase tracking-widest text-sky-400 -mt-1">waasbaas.com</span>
+                </div>
+            </a>
+
+            <!-- Center: Smooth-Scroll Navigation Links -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
+                <a href="#how-it-works" class="hover:text-waas-cyan transition-colors">Hoe WaaS Werkt</a>
+                <a href="#features" class="hover:text-waas-cyan transition-colors">Functies</a>
+                <a href="#pricing" class="hover:text-waas-cyan transition-colors">Prijzen</a>
+                <a href="#faq" class="hover:text-waas-cyan transition-colors">FAQ</a>
+            </nav>
+
+            <!-- Right: Direct Email Link & Glowing CTA Button -->
+            <div class="hidden lg:flex items-center gap-5">
+                <a href="mailto:mr@waasbaas.com" class="flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-waas-cyan transition-colors px-3 py-1.5 rounded-lg bg-slate-800/70 border border-slate-700/80">
+                    <i data-lucide="mail" class="w-3.5 h-3.5 text-waas-cyan"></i>
+                    mr@waasbaas.com
+                </a>
+                <a href="#contact" class="px-5 py-2.5 rounded-xl font-bold text-sm text-white bg-gradient-to-r from-waas-orange to-amber-500 neon-orange transition-all duration-300 hover:scale-105 flex items-center gap-2">
+                    <span>Word de Baas</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </a>
+            </div>
+
+            <!-- Mobile Hamburger Button -->
+            <button id="mobile-menu-btn" aria-label="Toggle Menu" class="md:hidden p-2.5 rounded-xl glass-panel text-slate-200 hover:text-waas-cyan focus:outline-none">
+                <i data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden glass-nav border-t border-slate-800 px-4 pt-3 pb-6 space-y-3">
+            <a href="#how-it-works" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 hover:text-waas-cyan">Hoe WaaS Werkt</a>
+            <a href="#features" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 hover:text-waas-cyan">Functies</a>
+            <a href="#pricing" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 hover:text-waas-cyan">Prijzen</a>
+            <a href="#faq" class="block px-3 py-2 rounded-lg text-base font-medium text-slate-200 hover:bg-slate-800/60 hover:text-waas-cyan">FAQ</a>
+            <div class="pt-3 border-t border-slate-800 flex flex-col gap-3">
+                <a href="mailto:mr@waasbaas.com" class="flex items-center justify-center gap-2 text-sm font-mono text-sky-400 py-2 rounded-lg bg-slate-800/70">
+                    <i data-lucide="mail" class="w-4 h-4"></i>
+                    mr@waasbaas.com
+                </a>
+                <a href="#contact" class="w-full py-3 rounded-xl font-bold text-center text-white bg-gradient-to-r from-waas-orange to-amber-500 neon-orange">
+                    Word de Baas — Begin nu
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- ==========================================
+         2. HERO SECTION (SPLIT 2-COLUMN LAYOUT)
+         ========================================== -->
+    <section class="relative z-10 pt-10 pb-20 lg:pt-16 lg:pb-28 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                
+                <!-- Left Column: Persuasive Copy & Dual CTAs (7 Cols on Desktop) -->
+                <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                    
+                    <!-- Glowing Pill Badge -->
+                    <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel neon-cyan">
+                        <span class="flex h-2.5 w-2.5 relative">
+                            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-waas-cyan opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-waas-cyan"></span>
+                        </span>
+                        <span class="text-xs sm:text-sm font-mono font-semibold tracking-wide text-waas-cyan uppercase">
+                            ⚡ Website as a Service (WaaS)
+                        </span>
+                    </div>
+
+                    <!-- Punchy Headline -->
+                    <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-[1.12]">
+                        Stop met het bouwen van websites. <br class="hidden sm:inline" />
+                        Laat <span class="text-transparent bg-clip-text bg-gradient-to-r from-waas-cyan via-sky-300 to-waas-purple neon-text-cyan">Meester Waas Baas</span> de jouwe runnen.
+                    </h1>
+
+                    <!-- Persuasive Subheadline -->
+                    <p class="text-lg sm:text-xl text-slate-300 max-w-2xl mx-auto lg:mx-0 font-normal leading-relaxed">
+                        Zeg vaarwel tegen torenhoge facturen van €5.000+, kapotte plug-ins en hosting-hoofdpijn. Krijg een op maat gemaakte, razendsnelle website met <span class="text-white font-semibold">onbeperkte updates, beveiliging en VIP-onderhoud</span>—alles voor een vast maandelijks abonnement.
+                    </p>
+
+                    <!-- Two CTAs -->
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                        <a href="#pricing" class="w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-base text-white bg-gradient-to-r from-waas-orange to-orange-500 neon-orange transition-all duration-300 hover:scale-[1.03] flex items-center justify-center gap-3">
+                            <span>Word de Baas (Bekijk Prijzen)</span>
+                            <i data-lucide="zap" class="w-5 h-5 fill-current"></i>
+                        </a>
+                        <a href="#how-it-works" class="w-full sm:w-auto px-7 py-4 rounded-2xl font-semibold text-base text-slate-200 glass-panel hover:border-waas-cyan/60 hover:text-white transition-all duration-300 flex items-center justify-center gap-2.5">
+                            <i data-lucide="play-circle" class="w-5 h-5 text-waas-cyan"></i>
+                            <span>Bekijk hoe WaaS werkt</span>
+                        </a>
+                    </div>
+
+                    <!-- Trust & Guarantee Bar -->
+                    <div class="pt-4 grid grid-cols-3 gap-4 max-w-lg mx-auto lg:mx-0 border-t border-slate-800/80">
+                        <div class="flex items-center gap-2 justify-center lg:justify-start">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                            <span class="text-xs sm:text-sm text-slate-400">€0 Opstartkosten</span>
+                        </div>
+                        <div class="flex items-center gap-2 justify-center lg:justify-start">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                            <span class="text-xs sm:text-sm text-slate-400">Binnen 24u Gewijzigd</span>
+                        </div>
+                        <div class="flex items-center gap-2 justify-center lg:justify-start">
+                            <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                            <span class="text-xs sm:text-sm text-slate-400">Altijd Opzegbaar</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: "Meester Waas Baas" Character Framed in Neon Container + Floating Holographic Cards (5 Cols) -->
+                <div class="lg:col-span-5 relative flex items-center justify-center mt-6 lg:mt-0">
+                    
+                    <!-- Ambient Studio & Cyan Backlight behind Character -->
+                    <div class="absolute inset-0 bg-gradient-to-tr from-amber-500/20 via-sky-500/20 to-purple-600/25 rounded-3xl blur-2xl animate-pulse-glow"></div>
+
+                    <!-- Main Neon-Bordered Character Frame -->
+                    <div class="relative w-full max-w-md rounded-3xl p-2 glass-panel neon-cyan-strong border-2 border-waas-cyan/50">
+                        
+                        <!-- Top Holographic Window Bar -->
+                        <div class="flex items-center justify-between px-4 py-2.5 bg-slate-900/90 rounded-t-2xl border-b border-sky-400/20">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400 inline-block"></span>
+                            </div>
+                            <span class="font-mono text-[11px] text-sky-400 flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-waas-mint animate-ping"></span>
+                                meester-waas.webp
+                            </span>
+                        </div>
+
+                        <!-- Character Image Container -->
+                        <div class="relative overflow-hidden rounded-b-2xl bg-gradient-to-b from-slate-800 to-slate-950 aspect-[4/5] flex items-center justify-center group">
+                            
+                            <!-- Primary Image Tag referencing GitHub meester-waas.webp -->
+                            <img 
+                                id="meester-waas-img"
+                                src="https://raw.githubusercontent.com/mail2morten/waasbaas/1fa817be0f156bfa7eddc6d246ff6c292b2e43ba/images/meester-waas.webp" 
+                                alt="Meester Waas Baas - Jouw Persoonlijke Website Baas" 
+                                class="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+                                onerror="this.src='https://github.com/mail2morten/waasbaas/blob/1fa817be0f156bfa7eddc6d246ff6c292b2e43ba/images/meester-waas.webp?raw=true';"
+                            />
+
+                            <!-- Bottom Gradient Overlay with Status Tag -->
+                            <div class="absolute bottom-3 inset-x-3 z-20 pointer-events-none flex items-center justify-between px-4 py-2.5 rounded-xl bg-slate-950/80 backdrop-blur-md border border-white/10">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="h-2.5 w-2.5 rounded-full bg-waas-mint animate-pulse"></span>
+                                    <span class="text-xs font-semibold text-white">Meester Waas is Online</span>
+                                </div>
+                                <span class="text-xs font-mono text-waas-cyan">Gem. Reactietijd: 14m</span>
+                            </div>
+                        </div>
+
+                        <!-- FLOATING HOLOGRAPHIC CARD 1: Top-Left (HTML/CSS Ready) -->
+                        <div class="hidden sm:block absolute -left-10 top-14 z-30 w-48 rounded-2xl p-3.5 glass-panel neon-orange border border-waas-orange/60 animate-float-slow">
+                            <div class="flex items-center gap-1.5 mb-2">
+                                <span class="w-2 h-2 rounded-full bg-rose-500"></span>
+                                <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+                                <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+                                <span class="ml-auto text-[10px] font-mono text-orange-300">HTML5/CSS</span>
+                            </div>
+                            <div class="font-mono text-xs font-bold text-white mb-1 flex items-center gap-1.5">
+                                <i data-lucide="code-2" class="w-4 h-4 text-waas-orange"></i>
+                                HTML/CSS Klaar
+                            </div>
+                            <div class="space-y-1 font-mono text-[10px] text-slate-300 bg-slate-950/70 p-2 rounded-lg border border-slate-800">
+                                <div class="text-sky-400">&lt;waas-engine&gt;</div>
+                                <div class="pl-2 text-amber-300">snelheid: <span class="text-waas-mint">100%</span>;</div>
+                                <div class="text-sky-400">&lt;/waas-engine&gt;</div>
+                            </div>
+                        </div>
+
+                        <!-- FLOATING HOLOGRAPHIC CARD 2: Top-Right (Cloud WaaS) -->
+                        <div class="hidden sm:block absolute -right-8 top-8 z-30 w-44 rounded-2xl p-3.5 glass-panel neon-cyan border border-waas-cyan/60 animate-float-reverse">
+                            <div class="flex items-center justify-between mb-1.5">
+                                <span class="text-[10px] font-mono uppercase tracking-wider text-waas-cyan">Cloud WaaS</span>
+                                <i data-lucide="cloud-lightning" class="w-4 h-4 text-waas-cyan"></i>
+                            </div>
+                            <div class="text-sm font-extrabold text-white">Auto-Scaling CDN</div>
+                            <div class="mt-2 flex items-center gap-1.5">
+                                <div class="h-1.5 flex-1 rounded-full bg-slate-800 overflow-hidden">
+                                    <div class="h-full w-11/12 bg-gradient-to-r from-waas-cyan to-waas-purple rounded-full"></div>
+                                </div>
+                                <span class="font-mono text-[10px] text-sky-300">SSL+</span>
+                            </div>
+                        </div>
+
+                        <!-- FLOATING HOLOGRAPHIC CARD 3: Bottom-Left (99.9% Uptime) -->
+                        <div class="hidden sm:block absolute -left-8 bottom-16 z-30 w-48 rounded-2xl p-3.5 glass-panel-purple neon-purple animate-float-medium">
+                            <div class="flex items-center gap-2.5">
+                                <div class="w-9 h-9 rounded-xl bg-emerald-500/20 border border-emerald-400/40 flex items-center justify-center text-waas-mint">
+                                    <i data-lucide="activity" class="w-5 h-5"></i>
+                                </div>
+                                <div>
+                                    <div class="text-xs font-mono text-slate-400">SLA Status</div>
+                                    <div class="text-sm font-extrabold text-white">99,9% Uptime</div>
+                                </div>
+                            </div>
+                            <div class="mt-2.5 flex items-end gap-1 h-6 px-1">
+                                <span class="flex-1 bg-emerald-400/50 h-3 rounded-sm"></span>
+                                <span class="flex-1 bg-emerald-400/70 h-4 rounded-sm"></span>
+                                <span class="flex-1 bg-emerald-400/60 h-3.5 rounded-sm"></span>
+                                <span class="flex-1 bg-emerald-400/80 h-5 rounded-sm"></span>
+                                <span class="flex-1 bg-waas-mint h-6 rounded-sm"></span>
+                                <span class="flex-1 bg-waas-mint h-6 rounded-sm"></span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         3. "WHY WAAS?" COMPARISON STRIP (OLD WAY VS. WAASBAAS WAY)
+         ========================================== -->
+    <section id="how-it-works" class="relative z-10 py-20 border-y border-slate-800/80 bg-slate-950/40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-purple-500/10 border border-purple-500/30 text-purple-300 text-xs font-mono uppercase">
+                    <i data-lucide="git-compare" class="w-3.5 h-3.5"></i>
+                    Waarom Website-as-a-Service?
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                    Traditionele bureaus werken niet meer. <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-waas-cyan to-waas-purple">Ontdek de WaasBaas manier.</span>
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Waarom duizenden euro's vooraf betalen voor een statische website die veroudert zodra hij live staat? Kies voor een dynamische, up-to-date website beheerd door Meester Waas Baas.
+                </p>
+            </div>
+
+            <!-- 2-Column Comparison Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-stretch">
+                
+                <!-- Card 1: The Old Way (Traditional Agency / Freelancer) -->
+                <div class="rounded-3xl p-8 bg-slate-900/70 border border-rose-500/25 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 px-4 py-1.5 bg-rose-500/20 border-b border-l border-rose-500/30 rounded-bl-2xl text-xs font-mono text-rose-300">
+                        DE OUDE MANIER
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-rose-500/15 border border-rose-500/30 flex items-center justify-center text-rose-400">
+                                <i data-lucide="frown" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Traditioneel Webdesign Bureau</h3>
+                                <p class="text-sm text-slate-400">Duur vooraf, stressvol achteraf</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-6 p-4 rounded-2xl bg-slate-950/80 border border-slate-800 flex items-baseline justify-between">
+                            <span class="text-sm text-slate-400 font-mono">Kosten Vooraf:</span>
+                            <span class="text-2xl sm:text-3xl font-extrabold text-rose-400 font-mono">€5,000 – €15,000+</span>
+                        </div>
+
+                        <ul class="space-y-4 text-slate-300 text-sm sm:text-base">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Enorme opstartkosten</strong> voordat je ook maar één lead of euro terugziet.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Verrassingsfacturen van €120/u</strong> telkens wanneer je een foto wilt wisselen of een titel wilt aanpassen.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Plug-in & beveiligingsverval:</strong> Je site wordt binnen 12 maanden trager, kwetsbaar en verouderd.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="x-circle" class="w-5 h-5 text-rose-400 shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Weken wachten</strong> op projectmanagers, simpelweg om antwoord te krijgen op eenvoudige supporttickets.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-slate-800/80 flex items-center justify-between text-xs font-mono text-slate-500">
+                        <span>STATUS: VEROUDERD_MODEL</span>
+                        <span>RISICOPROFIEL: HOOG</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: The WaasBaas Way (Subscription WaaS) -->
+                <div class="rounded-3xl p-8 glass-panel neon-cyan border-2 border-waas-cyan/60 flex flex-col justify-between relative overflow-hidden">
+                    <div class="absolute top-0 right-0 px-4 py-1.5 bg-gradient-to-r from-waas-cyan to-waas-purple text-slate-950 font-bold rounded-bl-2xl text-xs font-mono">
+                        ⚡ DE WAASBAAS MANIER
+                    </div>
+
+                    <div>
+                        <div class="flex items-center gap-3 mb-6">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-400/20 border border-waas-cyan flex items-center justify-center text-waas-cyan">
+                                <i data-lucide="sparkles" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Meester Waas Baas Abonnement</h3>
+                                <p class="text-sm text-sky-300">All-in design, hosting & continu beheer</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-6 p-4 rounded-2xl bg-slate-900/90 border border-sky-400/30 flex items-baseline justify-between">
+                            <span class="text-sm text-sky-300 font-mono">Vast Maandelijks Abonnement:</span>
+                            <span class="text-2xl sm:text-3xl font-extrabold text-waas-mint font-mono">€0 Vooraf</span>
+                        </div>
+
+                        <ul class="space-y-4 text-slate-200 text-sm sm:text-base">
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-waas-mint shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Custom UI/UX vanaf nul gebouwd:</strong> Hoog-converterend design afgestemd op jouw merk, zonder die rekening van €5k.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-waas-mint shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Onbeperkte content aanpassingen inbegrepen:</strong> Mail naar <code class="text-waas-cyan font-mono text-xs">mr@waasbaas.com</code> en Meester Waas updatet het binnen 24u.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-waas-mint shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Managed Cloud Hosting, SSL & Dagelijkse Back-ups:</strong> 99,9% uptime en bank-grade DDoS-bescherming standaard ingebouwd.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 text-waas-mint shrink-0 mt-0.5"></i>
+                                <span><strong class="text-white">Veroudert nooit:</strong> Continue prestatie-optimalisatie, SEO-verbeteringen en periodieke design opfrisbeurten.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="mt-8 pt-5 border-t border-sky-400/20 flex items-center justify-between text-xs font-mono text-waas-cyan">
+                        <span>STATUS: 100% ZORGELOOS</span>
+                        <a href="#pricing" class="underline hover:text-white">KIES JOUW PLAN →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         4. BENTO GRID FEATURES SECTION (6 HOLOGRAPHIC CARDS)
+         ========================================== -->
+    <section id="features" class="relative z-10 py-24">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Heading -->
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+                <div class="space-y-4 max-w-2xl">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-sky-400/30 text-waas-cyan text-xs font-mono uppercase">
+                        <i data-lucide="layers" class="w-3.5 h-3.5"></i>
+                        Holografische WaaS Engine
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                        Alles Wat Jouw Website Nodig Heeft. <br />
+                        <span class="text-transparent bg-clip-text bg-gradient-to-r from-waas-cyan via-sky-300 to-waas-orange">Geregeld door De Baas.</span>
+                    </h2>
+                </div>
+                <p class="text-slate-400 max-w-md text-sm sm:text-base">
+                    Elk venster in de studio van Meester Waas Baas vertegenwoordigt een kernpijler van jouw digitale aanwezigheid—24/7 gebouwd, gemonitord en geoptimaliseerd.
+                </p>
+            </div>
+
+            <!-- Bento Grid (6 Holographic macOS-style Windows) -->
+            <div class="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-6">
+                
+                <!-- Bento Card 1: Custom UI/UX Design (Span 7 on LG) -->
+                <div class="md:col-span-6 lg:col-span-7 rounded-3xl glass-panel holo-card overflow-hidden flex flex-col justify-between">
+                    <!-- macOS Holographic Top Bar -->
+                    <div class="px-5 py-3 bg-slate-900/80 border-b border-sky-400/20 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <span class="font-mono text-xs text-sky-400">01 // UI_UX_STUDIO.app</span>
+                    </div>
+                    <div class="p-7 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-400/15 border border-waas-cyan/40 flex items-center justify-center text-waas-cyan">
+                                <i data-lucide="palette" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Op Maat Gemaakt, Conversiegericht UI/UX Design</h3>
+                            <p class="text-slate-300 leading-relaxed">
+                                Geen standaard templates. Wij ontwerpen een op maat gemaakte, responsieve merkervaring, gebouwd om bezoekers om te zetten in betalende klanten op mobiel, tablet en desktop.
+                            </p>
+                        </div>
+                        <!-- Mini Holographic UI Wireframe Preview -->
+                        <div class="mt-8 p-4 rounded-2xl bg-slate-950/75 border border-sky-400/20 grid grid-cols-3 gap-3">
+                            <div class="p-3 rounded-xl bg-sky-500/10 border border-sky-400/30">
+                                <div class="w-8 h-2 rounded bg-waas-cyan mb-2"></div>
+                                <div class="w-full h-1.5 rounded bg-slate-700 mb-1"></div>
+                                <div class="w-2/3 h-1.5 rounded bg-slate-700"></div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-orange-500/10 border border-orange-400/30">
+                                <div class="w-8 h-2 rounded bg-waas-orange mb-2"></div>
+                                <div class="w-full h-1.5 rounded bg-slate-700 mb-1"></div>
+                                <div class="w-3/4 h-1.5 rounded bg-slate-700"></div>
+                            </div>
+                            <div class="p-3 rounded-xl bg-purple-500/10 border border-purple-400/30">
+                                <div class="w-8 h-2 rounded bg-waas-purple mb-2"></div>
+                                <div class="w-full h-1.5 rounded bg-slate-700 mb-1"></div>
+                                <div class="w-4/5 h-1.5 rounded bg-slate-700"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Card 2: Blazing Fast Cloud Hosting (Span 5 on LG) -->
+                <div class="md:col-span-6 lg:col-span-5 rounded-3xl glass-panel-purple holo-card overflow-hidden flex flex-col justify-between">
+                    <div class="px-5 py-3 bg-slate-900/80 border-b border-purple-400/20 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <span class="font-mono text-xs text-purple-300">02 // CLOUD_EDGE_CDN.sh</span>
+                    </div>
+                    <div class="p-7 sm:p-8 flex-1 flex flex-col justify-between">
+                        <div class="space-y-4">
+                            <div class="w-12 h-12 rounded-2xl bg-purple-500/15 border border-purple-400/40 flex items-center justify-center text-purple-300">
+                                <i data-lucide="server" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white">Razendsnelle NVMe Cloud Hosting</h3>
+                            <p class="text-slate-300 leading-relaxed">
+                                Gehost op Europese edge servers met laadtijden van minder dan een seconde, automatische dagelijkse back-ups en gratis SSL-certificaten.
+                            </p>
+                        </div>
+                        <div class="mt-8 p-4 rounded-2xl bg-slate-950/80 border border-purple-500/25 flex items-center justify-between">
+                            <div>
+                                <div class="text-xs font-mono text-slate-400">GOOGLE LIGHTHOUSE</div>
+                                <div class="text-2xl font-extrabold text-waas-mint font-mono">99 / 100</div>
+                            </div>
+                            <div class="text-right">
+                                <div class="text-xs font-mono text-slate-400">TTFB SNELHEID</div>
+                                <div class="text-lg font-bold text-waas-cyan font-mono">&lt; 45ms</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Card 3: Unlimited Content Edits (Span 4 on LG) -->
+                <div class="md:col-span-3 lg:col-span-4 rounded-3xl glass-panel holo-card overflow-hidden flex flex-col justify-between">
+                    <div class="px-5 py-3 bg-slate-900/80 border-b border-sky-400/20 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <span class="font-mono text-xs text-waas-orange">03 // VIP_EDITS.jsx</span>
+                    </div>
+                    <div class="p-7 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-orange-500/15 border border-waas-orange/40 flex items-center justify-center text-waas-orange">
+                                <i data-lucide="wand-2" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Onbeperkte Content Aanpassingen</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Nieuwe teamfoto, seizoenspromotie of prijsupdate nodig? Stuur gewoon een berichtje—wij regelen de code en zetten het direct live.
+                            </p>
+                        </div>
+                        <div class="mt-6 px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs text-amber-300 flex items-center justify-between">
+                            <span>&gt; git push origin live</span>
+                            <span class="text-waas-mint">KLAAR ✓</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Card 4: SEO & Analytics Built-In (Span 4 on LG) -->
+                <div class="md:col-span-3 lg:col-span-4 rounded-3xl glass-panel holo-card overflow-hidden flex flex-col justify-between">
+                    <div class="px-5 py-3 bg-slate-900/80 border-b border-sky-400/20 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <span class="font-mono text-xs text-waas-mint">04 // SEO_RANK.py</span>
+                    </div>
+                    <div class="p-7 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-emerald-500/15 border border-waas-mint/40 flex items-center justify-center text-waas-mint">
+                                <i data-lucide="trending-up" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">Ingebouwde SEO & Analytics</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Semantische HTML5-structuur, schema mark-up, geautomatiseerde sitemaps en privacyvriendelijke analytics, zodat jij lokaal domineert in de zoekresultaten.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs">
+                            <span class="text-slate-400">Organisch Verkeer</span>
+                            <span class="text-waas-mint font-bold">+184% ↑</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bento Card 5: 24/7 Security Shield & Core Updates (Span 4 on LG) -->
+                <div class="md:col-span-6 lg:col-span-4 rounded-3xl glass-panel holo-card overflow-hidden flex flex-col justify-between">
+                    <div class="px-5 py-3 bg-slate-900/80 border-b border-sky-400/20 flex items-center justify-between">
+                        <div class="flex items-center gap-2">
+                            <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                            <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                            <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                        </div>
+                        <span class="font-mono text-xs text-sky-400">05 // SHIELD_GUARD. daemon</span>
+                    </div>
+                    <div class="p-7 flex-1 flex flex-col justify-between">
+                        <div class="space-y-3">
+                            <div class="w-12 h-12 rounded-2xl bg-sky-500/15 border border-sky-400/40 flex items-center justify-center text-sky-400">
+                                <i data-lucide="shield-check" class="w-6 h-6"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white">24/7 Beveiliging & Monitoring</h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                Proactieve firewallbescherming, uptime-pings elke 30 seconden en nul kwetsbare externe plug-ins om je zorgen over te maken.
+                            </p>
+                        </div>
+                        <div class="mt-6 flex items-center justify-between px-3.5 py-2.5 rounded-xl bg-slate-950/80 border border-slate-800 font-mono text-xs">
+                            <span class="text-slate-400">Bedreigingen Geblokkeerd</span>
+                            <span class="text-waas-cyan font-bold">100% Beschermd</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         5. TRANSPARENT SUBSCRIPTION PRICING (3 TIERS)
+         ========================================== -->
+    <section id="pricing" class="relative z-10 py-24 border-t border-slate-800/80 bg-slate-950/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Pricing Header & Billing Toggle -->
+            <div class="text-center max-w-3xl mx-auto mb-14 space-y-5">
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-orange-500/10 border border-orange-500/30 text-waas-orange text-xs font-mono uppercase">
+                    <i data-lucide="credit-card" class="w-3.5 h-3.5"></i>
+                    Transparante WaaS Prijzen
+                </div>
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight">
+                    Voorspelbare Maandelijkse Abonnementen. <br />
+                    <span class="text-transparent bg-clip-text bg-gradient-to-r from-waas-cyan to-waas-purple">Geen Opstartkosten.</span>
+                </h2>
+                <p class="text-slate-400 text-base sm:text-lg">
+                    Kies het abonnement dat past bij jouw ambitie. Altijd mogelijk om te upgraden, downgraden of pauzeren.
+                </p>
+
+                <!-- Interactive Monthly / Annual Toggle -->
+                <div class="pt-2 inline-flex items-center gap-3 p-1.5 rounded-2xl glass-panel">
+                    <button id="btn-monthly" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waas-cyan text-slate-950 transition-all">
+                        Maandelijks Betalen
+                    </button>
+                    <button id="btn-annual" class="px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2">
+                        <span>Jaarlijks Betalen</span>
+                        <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-waas-mint/40 text-waas-mint font-mono text-[10px]">2 Maanden Gratis</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 3 Pricing Cards -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-stretch">
+                
+                <!-- TIER 1: Starter Baas -->
+                <div class="rounded-3xl glass-panel holo-card p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-xs uppercase tracking-widest text-slate-400">TIER 01</span>
+                            <span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono">ZZP & Lokaal</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Starter Baas</h3>
+                        <p class="text-sm text-slate-400 mt-2">
+                            Perfect voor ondernemers, lokale bedrijven en freelancers die een ijzersterke online aanwezigheid willen.
+                        </p>
+
+                        <div class="my-8 pb-6 border-b border-slate-800">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono price-value" data-monthly="€149" data-annual="€124">€149</span>
+                                <span class="text-slate-400 text-sm font-mono">/maand</span>
+                            </div>
+                            <p class="text-xs text-waas-mint font-mono mt-2">✓ €0 Opstart- & Ontwerpkosten</p>
+                        </div>
+
+                        <ul class="space-y-3.5 text-sm text-slate-300">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-waas-cyan shrink-0"></i>
+                                <span>Op Maat Gemaakte Website (Tot 5 Pagina's)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-waas-cyan shrink-0"></i>
+                                <span>Razendsnelle Managed Cloud Hosting & SSL</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-waas-cyan shrink-0"></i>
+                                <span>2 Uur Content Aanpassingen & Updates / Maand</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-waas-cyan shrink-0"></i>
+                                <span>On-Page SEO & Google Bedrijfsprofiel Integratie</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-waas-cyan shrink-0"></i>
+                                <span>24/7 Uptime & Beveiligingsmonitoring</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button onclick="selectPlan('Starter Baas')" class="mt-8 w-full py-4 rounded-2xl font-bold text-sm text-white glass-panel hover:border-waas-cyan hover:bg-sky-500/10 transition-all flex items-center justify-center gap-2">
+                        <span>Kies Starter Baas</span>
+                        <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </button>
+                </div>
+
+                <!-- TIER 2: Groei Baas (Highlighted with Cyan/Purple Neon Border & "Most Popular" Badge) -->
+                <div class="rounded-3xl p-8 bg-slate-900/90 border-2 border-waas-cyan neon-cyan-strong relative flex flex-col justify-between transform lg:-translate-y-4">
+                    
+                    <!-- Most Popular Floating Pill -->
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 rounded-full bg-gradient-to-r from-waas-cyan to-waas-purple text-slate-950 font-extrabold text-xs font-mono tracking-wider uppercase shadow-lg">
+                        ★ Meest Gekozen
+                    </div>
+
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-xs uppercase tracking-widest text-waas-cyan">TIER 02</span>
+                            <span class="px-3 py-1 rounded-full bg-sky-500/20 border border-waas-cyan/40 text-waas-cyan text-xs font-mono">Groeiend MKB</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Groei Baas</h3>
+                        <p class="text-sm text-slate-300 mt-2">
+                            Ideaal voor groeiende bedrijven die onbeperkte content updates, actieve SEO-groei en leadgeneratie willen.
+                        </p>
+
+                        <div class="my-8 pb-6 border-b border-sky-400/20">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl sm:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white to-sky-300 font-mono price-value" data-monthly="€299" data-annual="€249">€299</span>
+                                <span class="text-slate-400 text-sm font-mono">/maand</span>
+                            </div>
+                            <p class="text-xs text-waas-mint font-mono mt-2">✓ €0 Vooraf + Gratis Migratie</p>
+                        </div>
+
+                        <ul class="space-y-3.5 text-sm text-slate-200">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                                <span><strong>Custom Multi-Page Website</strong> (Tot 15 Pagina's + Blog)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                                <span><strong>Onbeperkte Content Updates</strong> (Binnen 24u)</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                                <span>Geavanceerde Snelheidsoptimalisatie & Global Edge CDN</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                                <span>Maandelijks SEO & Conversie Analytics Rapport</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                                <span>Integratie van CRM, Boekingen & Lead Formulieren</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-4 h-4 text-waas-mint shrink-0"></i>
+                                <span>Directe WhatsApp & E-mail Toegang tot Meester Waas</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button onclick="selectPlan('Groei Baas (Most Popular)')" class="mt-8 w-full py-4 rounded-2xl font-bold text-sm text-white bg-gradient-to-r from-waas-orange to-amber-500 neon-orange transition-all hover:scale-[1.02] flex items-center justify-center gap-2">
+                        <span>Start Met Groei Baas</span>
+                        <i data-lucide="zap" class="w-4 h-4 fill-current"></i>
+                    </button>
+                </div>
+
+                <!-- TIER 3: Meester Baas -->
+                <div class="rounded-3xl glass-panel-purple holo-card p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="font-mono text-xs uppercase tracking-widest text-purple-300">TIER 03</span>
+                            <span class="px-3 py-1 rounded-full bg-purple-500/20 border border-purple-400/30 text-purple-300 text-xs font-mono">Schaal & E-Com</span>
+                        </div>
+                        <h3 class="text-2xl font-extrabold text-white">Meester Baas</h3>
+                        <p class="text-sm text-slate-400 mt-2">
+                            Jouw complete uitbestede webafdeling met custom web-apps, e-commerce en een prioriteits-SLA.
+                        </p>
+
+                        <div class="my-8 pb-6 border-b border-slate-800">
+                            <div class="flex items-baseline gap-1">
+                                <span class="text-4xl sm:text-5xl font-extrabold text-white font-mono price-value" data-monthly="€499" data-annual="€415">€499</span>
+                                <span class="text-slate-400 text-sm font-mono">/maand</span>
+                            </div>
+                            <p class="text-xs text-purple-300 font-mono mt-2">✓ Eigen Slack / VIP Kanaal</p>
+                        </div>
+
+                        <ul class="space-y-3.5 text-sm text-slate-300">
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                <span><strong>Onbeperkte Pagina's</strong>, Funnels & E-Commerce</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                <span><strong>Prioriteit Updates (Zelfde Dag)</strong> & Custom Functies</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                <span>Custom API, Betalingen (iDEAL/Stripe) & ERP Sync</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                <span>A/B Conversietesten & Heatmap Tracking</span>
+                            </li>
+                            <li class="flex items-center gap-3">
+                                <i data-lucide="check" class="w-4 h-4 text-purple-400 shrink-0"></i>
+                                <span>Kwartaal Strategiegesprek met Meester Waas Baas</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <button onclick="selectPlan('Meester Baas')" class="mt-8 w-full py-4 rounded-2xl font-bold text-sm text-white glass-panel-purple hover:border-purple-400 hover:bg-purple-500/15 transition-all flex items-center justify-center gap-2">
+                        <span>Kies Meester Baas</span>
+                        <i data-lucide="crown" class="w-4 h-4 text-amber-400"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         6. INTERACTIVE FAQ SECTION
+         ========================================== -->
+    <section id="faq" class="relative z-10 py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 space-y-3">
+                <span class="text-xs font-mono uppercase tracking-widest text-waas-cyan">Heb je vragen?</span>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white">Veelgestelde Vragen</h2>
+                <p class="text-slate-400 text-sm sm:text-base">Heldere antwoorden van Meester Waas Baas.</p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="rounded-2xl glass-panel overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Hoe kunnen jullie een custom website bouwen voor €0 opstartkosten?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-waas-cyan transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/80 pt-4">
+                        In tegenstelling tot traditionele bureaus die winst maken op grote eenmalige projecten en daarna verdwijnen, investeren wij in een langdurige samenwerking met jou. Omdat onze modulaire holografische workflow extreem efficiënt is, dekken wij de initiële bouwkosten. We verdienen ons geld door jouw website maand na maand snel, veilig en conversiegericht te houden.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="rounded-2xl glass-panel overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Hoe werken "Onbeperkte Content Aanpassingen" in de praktijk?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-waas-cyan transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/80 pt-4">
+                        Telkens wanneer je tekst wilt wijzigen, nieuwe projectfoto's wilt toevoegen, een teamlid wilt updaten of een nieuwe sectie wilt lanceren, stuur je simpelweg een e-mail naar <code class="text-waas-cyan font-mono">mr@waasbaas.com</code>. Meester Waas Baas regelt het design en de code-updates—meestal binnen 24 uur op werkdagen.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="rounded-2xl glass-panel overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Ben ik eigenaar van mijn domeinnaam en content?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-waas-cyan transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/80 pt-4">
+                        100% ja. Jouw domeinnaam, merkmateriaal, teksten en klantdata blijven altijd van jou. Zelfs als wij voor het gemak je DNS beheren, behoud jij te allen tijde het volledige eigendom.
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="rounded-2xl glass-panel overflow-hidden">
+                    <button class="faq-toggle w-full px-6 py-5 text-left flex items-center justify-between gap-4 focus:outline-none">
+                        <span class="font-bold text-white text-base sm:text-lg">Hoe snel kan mijn nieuwe WaasBaas website live gaan?</span>
+                        <i data-lucide="chevron-down" class="w-5 h-5 text-waas-cyan transition-transform duration-300"></i>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-5 text-slate-300 text-sm sm:text-base leading-relaxed border-t border-slate-800/80 pt-4">
+                        De meeste Starter Baas en Groei Baas websites gaan van de kick-off call tot live lancering in <strong>7 tot 14 dagen</strong>. Heb je een urgente lancering? Laat het ons weten in het formulier hieronder en wij geven jouw sprint voorrang.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ==========================================
+         7. INTERACTIVE CONTACT / LEAD CAPTURE FOOTER
+         ========================================== -->
+    <footer id="contact" class="relative z-10 pt-20 pb-12 border-t border-sky-400/20 bg-slate-950/90">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-slate-800">
+                
+                <!-- Left Column: Direct Callout & mr@waasbaas.com (5 Cols) -->
+                <div class="lg:col-span-5 space-y-6">
+                    <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sky-500/10 border border-waas-cyan/40 text-waas-cyan text-xs font-mono">
+                        <span class="w-2 h-2 rounded-full bg-waas-mint animate-ping"></span>
+                        KLAAR VOOR LANCERING
+                    </div>
+
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Klaar om je website hoofdpijn uit te besteden?
+                    </h2>
+
+                    <p class="text-slate-300 leading-relaxed">
+                        Stuur direct een bericht naar <strong class="text-white">Meester Waas Baas</strong>. Wij bekijken je huidige site (of nieuwe idee) en sturen je binnen 24 uur een gratis holografische roadmap.
+                    </p>
+
+                    <!-- Prominent Direct Email Callout Box -->
+                    <div class="p-5 rounded-2xl glass-panel neon-cyan space-y-3">
+                        <div class="text-xs font-mono uppercase tracking-wider text-slate-400">Directe Studio Hotline</div>
+                        <div class="flex flex-wrap items-center justify-between gap-3">
+                            <a href="mailto:mr@waasbaas.com" class="text-xl sm:text-2xl font-extrabold font-mono text-waas-cyan hover:underline flex items-center gap-2.5">
+                                <i data-lucide="mail-check" class="w-6 h-6 text-waas-orange"></i>
+                                mr@waasbaas.com
+                            </a>
+                            <button id="copy-email-btn" type="button" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-xs font-mono text-slate-200 border border-slate-700 transition flex items-center gap-1.5">
+                                <i data-lucide="copy" class="w-3.5 h-3.5 text-waas-cyan"></i>
+                                <span id="copy-email-text">Kopieer E-mail</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Mini Brand Persona Sign-off -->
+                    <div class="flex items-center gap-4 pt-2">
+                        <div class="w-12 h-12 rounded-2xl bg-gradient-to-br from-waas-cyan to-waas-purple p-0.5">
+                            <div class="w-full h-full bg-slate-900 rounded-[14px] flex items-center justify-center font-extrabold text-waas-cyan font-mono">
+                                MW
+                            </div>
+                        </div>
+                        <div>
+                            <div class="text-sm font-bold text-white">Meester Waas Baas</div>
+                            <div class="text-xs text-slate-400 font-mono">Oprichter & Chief Website Boss @ waasbaas.com</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column: Interactive Holographic Lead Capture Form (7 Cols) -->
+                <div class="lg:col-span-7">
+                    <div class="rounded-3xl glass-panel neon-cyan overflow-hidden">
+                        <!-- Holographic Window Bar -->
+                        <div class="px-6 py-3.5 bg-slate-900/90 border-b border-sky-400/20 flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-rose-500"></span>
+                                <span class="w-3 h-3 rounded-full bg-amber-400"></span>
+                                <span class="w-3 h-3 rounded-full bg-emerald-400"></span>
+                            </div>
+                            <span class="font-mono text-xs text-sky-400">START_PROJECT // mr@waasbaas.com</span>
+                        </div>
+
+                        <form id="waas-contact-form" class="p-6 sm:p-8 space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="name" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Jouw Naam *</label>
+                                    <input type="text" id="name" name="name" required placeholder="Jan de Vries" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-waas-cyan transition text-sm">
+                                </div>
+                                <div>
+                                    <label for="business_url" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Bedrijfs-URL (of Nieuw Idee)</label>
+                                    <input type="text" id="business_url" name="business_url" placeholder="https://jouwbedrijf.nl" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-waas-cyan transition text-sm font-mono">
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                                <div>
+                                    <label for="email" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Jouw E-mailadres *</label>
+                                    <input type="email" id="email" name="email" required placeholder="jan@jouwbedrijf.nl" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-waas-cyan transition text-sm">
+                                </div>
+                                <div>
+                                    <label for="plan" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Gewenst WaaS Abonnement</label>
+                                    <select id="plan" name="plan" class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white focus:outline-none focus:border-waas-cyan transition text-sm">
+                                        <option value="Groei Baas (Most Popular)">Groei Baas — €299/m (Meest Gekozen)</option>
+                                        <option value="Starter Baas">Starter Baas — €149/m</option>
+                                        <option value="Meester Baas">Meester Baas — €499/m</option>
+                                        <option value="Not sure yet">Nog niet zeker — Adviseer mij</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label for="message" class="block text-xs font-mono uppercase tracking-wider text-slate-300 mb-2">Hoe kan Meester Waas Baas jou helpen? *</label>
+                                <textarea id="message" name="message" rows="4" required placeholder="Vertel ons over je bedrijfsdoelen, huidige website-frustraties of gewenste lanceerdatum..." class="w-full px-4 py-3.5 rounded-xl bg-slate-900/90 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:border-waas-cyan transition text-sm"></textarea>
+                            </div>
+
+                            <!-- Submit CTA -->
+                            <button type="submit" class="w-full py-4 px-6 rounded-2xl font-extrabold text-base text-white bg-gradient-to-r from-waas-orange to-amber-500 neon-orange transition-all duration-300 hover:scale-[1.01] flex items-center justify-center gap-3">
+                                <span>Verstuur Aanvraag naar Meester Waas Baas</span>
+                                <i data-lucide="send" class="w-5 h-5"></i>
+                            </button>
+
+                            <!-- Feedback Message Box (No alert() used) -->
+                            <div id="form-feedback" class="hidden p-4 rounded-xl bg-emerald-500/15 border border-waas-mint text-waas-mint text-sm font-mono flex items-center gap-3">
+                                <i data-lucide="check-circle-2" class="w-5 h-5 shrink-0"></i>
+                                <span id="form-feedback-text">Geweldig! Je bericht is klaar voor mr@waasbaas.com.</span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Bottom Copyright & Links -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-mono">
+                <div class="flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-waas-cyan"></span>
+                    <span>© <span id="current-year">2026</span> WaasBaas (waasbaas.com). Alle rechten voorbehouden.</span>
+                </div>
+                <div class="flex items-center gap-6">
+                    <a href="#how-it-works" class="hover:text-waas-cyan transition">Waarom WaaS</a>
+                    <a href="#features" class="hover:text-waas-cyan transition">Functies</a>
+                    <a href="#pricing" class="hover:text-waas-cyan transition">Prijzen</a>
+                    <a href="mailto:mr@waasbaas.com" class="text-sky-400 hover:underline">mr@waasbaas.com</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         JAVASCRIPT INTERACTIVITY
+         ========================================== -->
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Set Current Year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // 1. Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // 2. Monthly / Annual Pricing Switcher
+        const btnMonthly = document.getElementById('btn-monthly');
+        const btnAnnual = document.getElementById('btn-annual');
+        const priceValues = document.querySelectorAll('.price-value');
+
+        btnMonthly.addEventListener('click', () => {
+            btnMonthly.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waas-cyan text-slate-950 transition-all';
+            btnAnnual.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition-all flex items-center gap-2';
+            priceValues.forEach(el => {
+                el.textContent = el.getAttribute('data-monthly');
+            });
+        });
+
+        btnAnnual.addEventListener('click', () => {
+            btnAnnual.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-waas-cyan text-slate-950 transition-all flex items-center gap-2';
+            btnMonthly.className = 'px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-slate-300 hover:text-white transition-all';
+            priceValues.forEach(el => {
+                el.textContent = el.getAttribute('data-annual');
+            });
+        });
+
+        // 4. Select Plan Helper (Scrolls to Contact Form & Pre-selects Tier)
+        function selectPlan(planName) {
+            const planSelect = document.getElementById('plan');
+            if (planSelect) {
+                planSelect.value = planName;
+            }
+            document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 5. FAQ Accordion Toggle
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const content = btn.nextElementSibling;
+                const icon = btn.querySelector('svg');
+                content.classList.toggle('hidden');
+                if (icon) {
+                    icon.classList.toggle('rotate-180');
+                }
+            });
+        });
+
+        // 6. Copy Email to Clipboard (using document.execCommand for iframe compatibility)
+        const copyEmailBtn = document.getElementById('copy-email-btn');
+        const copyEmailText = document.getElementById('copy-email-text');
+        copyEmailBtn.addEventListener('click', () => {
+            const tempInput = document.createElement('textarea');
+            tempInput.value = 'mr@waasbaas.com';
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempInput);
+
+            copyEmailText.textContent = 'Gekopieerd!';
+            setTimeout(() => {
+                copyEmailText.textContent = 'Kopieer E-mail';
+            }, 2500);
+        });
+
+        // 7. Interactive Contact Form Handler
+        const contactForm = document.getElementById('waas-contact-form');
+        const formFeedback = document.getElementById('form-feedback');
+        const formFeedbackText = document.getElementById('form-feedback-text');
+
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('name').value.trim();
+            const url = document.getElementById('business_url').value.trim() || 'Nieuw Website Project';
+            const plan = document.getElementById('plan').value;
+            const message = document.getElementById('message').value.trim();
+
+            formFeedback.classList.remove('hidden');
+            formFeedbackText.textContent = `Bedankt ${name}! Meester Waas Baas heeft je ${plan} aanvraag voor (${url}) ontvangen. We openen nu je e-mailprogramma voor mr@waasbaas.com...`;
+
+            // Construct mailto link so the user can also fire a real email immediately
+            const subject = encodeURIComponent(`WaasBaas WaaS Aanvraag: ${plan} - ${name}`);
+            const body = encodeURIComponent(`Hoi Meester Waas Baas,\n\nNaam: ${name}\nWebsite/URL: ${url}\nGeselecteerd Abonnement: ${plan}\n\nBericht:\n${message}`);
+            window.location.href = `mailto:mr@waasbaas.com?subject=${subject}&body=${body}`;
+        });
+    </script>
+</body>
+</html>
