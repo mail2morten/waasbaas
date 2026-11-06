@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WaaSBaas | Slimme Intake</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .fade-in { animation: fadeIn 0.25s ease-out forwards; }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-center items-center p-4">
+
+  <!-- Main Widget Card -->
+  <div class="max-w-lg w-full bg-slate-900 border border-slate-800 rounded-2xl shadow-2xl overflow-hidden">
+    
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-indigo-900 to-slate-900 p-6 border-b border-slate-800">
+      <div class="flex items-center justify-between">
+        <div>
+          <span class="text-xs uppercase tracking-wider font-semibold text-indigo-400 bg-indigo-950 px-2.5 py-1 rounded-full">WaaSBaas Intake</span>
+          <h1 class="text-2xl font-bold mt-3 text-white">Hoe kan ik je bedrijf helpen?</h1>
+          <p class="text-sm text-slate-400 mt-1">Kies wat je nodig hebt. Geen formulieren-hel, gewoon direct via WhatsApp.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dynamic Body -->
+    <div class="p-6">
+
+      <!-- STEP 1: The 3 Triage Buttons -->
+      <div id="step-home" class="space-y-3 fade-in">
+        
+        <button onclick="selectPath('waas')" class="w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-indigo-500 transition group flex items-start gap-4">
+          <div class="bg-indigo-500/10 text-indigo-400 p-3 rounded-lg text-2xl group-hover:scale-110 transition">🚀</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-white group-hover:text-indigo-400 transition">Nieuwe Website & Automatisering</h3>
+              <span class="text-slate-500 group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Een lead-genererende site + WhatsApp triage voor een vast bedrag per maand.</p>
+          </div>
+        </button>
+
+        <button onclick="selectPath('audit')" class="w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-emerald-500 transition group flex items-start gap-4">
+          <div class="bg-emerald-500/10 text-emerald-400 p-3 rounded-lg text-2xl group-hover:scale-110 transition">⚙️</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-white group-hover:text-emerald-400 transition">Digitale & Operationele Audit</h3>
+              <span class="text-slate-500 group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Breng de chaos in kaart. Een blauwdruk om je admin en klantcontact te halveren.</p>
+          </div>
+        </button>
+
+        <button onclick="selectPath('contact')" class="w-full text-left p-4 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-amber-500 transition group flex items-start gap-4">
+          <div class="bg-amber-500/10 text-amber-400 p-3 rounded-lg text-2xl group-hover:scale-110 transition">💬</div>
+          <div class="flex-1">
+            <div class="flex items-center justify-between">
+              <h3 class="font-semibold text-white group-hover:text-amber-400 transition">Gewoon een korte vraag</h3>
+              <span class="text-slate-500 group-hover:translate-x-1 transition">→</span>
+            </div>
+            <p class="text-xs text-slate-400 mt-1">Heb je een andere vraag of wil je even sparren? Stuur me een berichtje.</p>
+          </div>
+        </button>
+
+      </div>
+
+      <!-- STEP 2A: WaaS Service Request -->
+      <div id="form-waas" class="hidden space-y-4 fade-in">
+        <button onclick="goBack()" class="text-xs text-indigo-400 hover:underline flex items-center gap-1">← Terug naar overzicht</button>
+        <h2 class="text-lg font-bold text-white">Website-as-a-Service (WaaS)</h2>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Wat is je grootste frustratie nu?</label>
+          <select id="waas-pain" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-indigo-500 outline-none">
+            <option value="Ik krijg te veel onzin-aanvragen via WhatsApp/Mail">Te veel onzin-aanvragen / tijdverlies</option>
+            <option value="Mijn huidige site stamt uit de prehistorie">Mijn huidige site stamt uit de prehistorie</option>
+            <option value="Ik wil meer en betere lokale leads">Ik wil meer en betere lokale leads</option>
+            <option value="Ik wil alles: een nieuwe site én minder admin">Ik wil alles: nieuwe site én minder admin</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">In welke branche ben je actief?</label>
+          <input id="waas-trade" type="text" placeholder="Bijv. Installateur, Hovenier, Zwembadbouwer" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-indigo-500 outline-none">
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Naam</label>
+            <input id="waas-name" type="text" placeholder="Jouw naam" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-indigo-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Huidige Website</label>
+            <input id="waas-url" type="text" placeholder="www.jouwsite.nl" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-indigo-500 outline-none">
+          </div>
+        </div>
+
+        <button onclick="sendWhatsApp('waas')" class="w-full bg-indigo-600 hover:bg-indigo-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+          <span>🚀 Verstuur Aanvraag via WhatsApp</span>
+        </button>
+      </div>
+
+      <!-- STEP 2B: Audit / Strategy Request -->
+      <div id="form-audit" class="hidden space-y-4 fade-in">
+        <button onclick="goBack()" class="text-xs text-emerald-400 hover:underline flex items-center gap-1">← Terug naar overzicht</button>
+        <h2 class="text-lg font-bold text-white">Operationele & Digitale Audit</h2>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Waar lekt de meeste tijd of omzet weg?</label>
+          <select id="audit-pain" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-emerald-500 outline-none">
+            <option value="Offertes maken voor mensen die toch niet kopen">Offertes maken voor mensen die toch niet kopen</option>
+            <option value="'s Avonds eindeloos appen en mailen met klanten">'s Avonds eindeloos appen en mailen met klanten</option>
+            <option value="Slechte systemen (alles staat in m'n hoofd of op papier)">Slechte systemen (alles in m'n hoofd/op papier)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Naam</label>
+            <input id="audit-name" type="text" placeholder="Jouw naam" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-emerald-500 outline-none">
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-slate-400 mb-1">Bedrijfsnaam</label>
+            <input id="audit-company" type="text" placeholder="Bedrijfsnaam" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-emerald-500 outline-none">
+          </div>
+        </div>
+
+        <button onclick="sendWhatsApp('audit')" class="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2">
+          <span>⚙️ Vraag Audit Aan via WhatsApp</span>
+        </button>
+      </div>
+
+      <!-- STEP 2C: Simple Contact -->
+      <div id="form-contact" class="hidden space-y-4 fade-in">
+        <button onclick="goBack()" class="text-xs text-amber-400 hover:underline flex items-center gap-1">← Terug naar overzicht</button>
+        <h2 class="text-lg font-bold text-white">Contact / Vraag</h2>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Wat wil je bespreken?</label>
+          <textarea id="contact-msg" rows="3" placeholder="Typ hier je vraag..." class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-amber-500 outline-none"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-400 mb-1">Je Naam</label>
+          <input id="contact-name" type="text" placeholder="Jouw naam" class="w-full bg-slate-950 border border-slate-700 rounded-lg p-2.5 text-sm text-white focus:border-amber-500 outline-none">
+        </div>
+
+        <button onclick="sendWhatsApp('contact')" class="w-full bg-slate-700 hover:bg-slate-600 text-white font-semibold py-3 px-4 rounded-xl shadow-lg transition flex items-center justify-center gap-2 border border-slate-600">
+          <span>💬 Stuur Bericht via WhatsApp</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="mt-6 text-center text-xs text-slate-500">
+    <p>Handgemaakt in Rosmalen door <strong class="text-slate-400">WaaSBaas</strong></p>
+  </div>
+
+  <script>
+    // WaaSBaas Mobile Number (Currently using your test number)
+    const WHATSAPP_NUMBER = "31649417076";
+
+    function selectPath(path) {
+      document.getElementById('step-home').classList.add('hidden');
+      document.getElementById('form-' + path).classList.remove('hidden');
+    }
+
+    function goBack() {
+      document.getElementById('form-waas').classList.add('hidden');
+      document.getElementById('form-audit').classList.add('hidden');
+      document.getElementById('form-contact').classList.add('hidden');
+      document.getElementById('step-home').classList.remove('hidden');
+    }
+
+    function sendWhatsApp(type) {
+      let msg = "";
+
+      if (type === 'waas') {
+        const pain = document.getElementById('waas-pain').value;
+        const trade = document.getElementById('waas-trade').value || "Niet ingevuld";
+        const name = document.getElementById('waas-name').value || "Onbekend";
+        const url = document.getElementById('waas-url').value || "Geen website";
+
+        msg = `🚀 *WAASBAAS - NIEUWE AANVRAAG*\n\n` +
+              `*Naam:* ${name}\n` +
+              `*Branche:* ${trade}\n` +
+              `*Huidige site:* ${url}\n` +
+              `*Grootste frustratie:* ${pain}\n\n` +
+              `Hoi! Laten we even bellen over hoe we dit kunnen stroomlijnen.`;
+      } 
+      else if (type === 'audit') {
+        const pain = document.getElementById('audit-pain').value;
+        const company = document.getElementById('audit-company').value || "Onbekend";
+        const name = document.getElementById('audit-name').value || "Onbekend";
+
+        msg = `⚙️ *WAASBAAS - AUDIT AANVRAAG*\n\n` +
+              `*Naam:* ${name} (${company})\n` +
+              `*Grootste tijdslek:* ${pain}\n\n` +
+              `Hoi! Ik wil graag een blauwdruk laten maken om mijn klantcontact en admin te automatiseren.`;
+      } 
+      else if (type === 'contact') {
+        const question = document.getElementById('contact-msg').value || "Ik wil graag even contact.";
+        const name = document.getElementById('contact-name').value || "Onbekend";
+
+        msg = `💬 *WAASBAAS - CONTACT*\n\n` +
+              `*Naam:* ${name}\n` +
+              `*Bericht:* ${question}`;
+      }
+
+      const wa_url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+      window.open(wa_url, '_blank');
+    }
+  </script>
+</body>
+</html>
